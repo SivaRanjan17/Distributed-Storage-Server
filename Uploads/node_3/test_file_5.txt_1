@@ -1,0 +1,37 @@
+this is a test file
+data in here is for test 
+wertyuiosdfghjkllxcvbnm,.dfghjkl;''
+
+import pytest
+import transactions as txn
+from objectifier import Objectifier
+import json
+from filehash import FileHash
+
+config = Objectifier(json.load(open('Test/testconfig.json')))
+
+class TestMilestone1():
+
+    #envsetup
+    def test_one(self):
+        """
+            Delete all the files on the server
+        """
+        files = txn.list_available_files().json()
+        for items in files:
+            rs = txn.delete_a_file_by_id(items['id'])
+            assert(rs.status_code==200)
+
+    # Verify that when there are no files, the list call displays no results
+    def test_two(self):
+        """
+        Verify that the list Files returns no files when there are no files to be displayed
+        """
+        response = txn.list_available_files().json()
+        assert(response.__len__()==0)
+    
+
+    # Verify that a file can be uploaded successfully 
+    def test_three(self):
+        """
+        Verify that the a file an be uploade

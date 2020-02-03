@@ -1,0 +1,21 @@
+plays the files correctly 
+        """
+        count = txn.list_available_files().json()
+        assert(count.__len__()>0)
+
+    # Verify that a delete operation happens successfully
+    def test_six(self):
+        """
+        Verify that a delete operation happens successfully
+        """
+        
+
+    # Verify that the deleted file is not displayed on the list call after deletion 
+    # Verify that the deleted file cannot be reterived
+    # Verify that appopriate error message is displayed while trying to access a file that doesnt exist
+    # Verify that a file can be retrived by name
+    # Verify that a file can be reterived by id
+    # Verify that a file can be deleted by name
+    # Verify that a file can be deleted by ID
+    # Verify that files of various names are accepted during upload
+    #Verify that we are able to delete all the files displayed

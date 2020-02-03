@@ -1,0 +1,25 @@
+d successfully
+        """
+        response = txn.upload_a_file(config.TEST_DATA.test_three.file_to_upload)
+        assert(response.status_code==200)
+
+
+    # Verify that the uploaded file can be reterived sucessfully - Verify check sum
+    def test_four(self):
+        """
+        Verify that the uploaded file can be reterived sucessfully - Verify check sum before upload and after reterive
+        """
+        md5= FileHash('sha1')
+        hash = md5.hash_file(config.TEST_DATA.test_four.file_to_upload)
+        response = txn.upload_a_file(config.TEST_DATA.test_four.file_to_upload)
+        assert(response.status_code==200)
+        id = response.content
+        r = txn.retrive_a_file_by_id(id)       
+        open('test_file_2.txt', 'wb+').write(r.content)
+        hash_2 = md5.hash_file('test_file_2.txt')
+        assert(hash==hash_2)
+
+    # Verify that when there are files , the list call displays the files correctly 
+    def test_five(self):
+        """
+        Verify that when there are files , the list call dis
